@@ -1,0 +1,22 @@
+doctype 5
+html(lang="en")
+  head
+    link(rel="stylesheet", type="text/css", href="/bootstrap/css/bootstrap.min.css")
+    link(rel="stylesheet", type="text/css", href="style.css")
+    script(type="text/javascript", src="jquery.js")
+    script(type="text/javascript", src="/bootstrap/js/bootstrap.min.js")
+    block head
+  body
+    .container
+      block content
+
+    .modal.hide.fade#submit-modal
+      .modal-header
+        button.close(type="button", data-dismiss="modal", aria-hidden="true") &times;
+        h3 Submit Score
+      .modal-body
+        p Enter your name
+        input#name(type="text", name="name", placeholder="Your name")
+      .modal-footer
+        a.btn#btn-submit-cancel(data-dismiss="modal") Cancel
+        a.btn.btn-primary#btn-submit-confirm Submit
