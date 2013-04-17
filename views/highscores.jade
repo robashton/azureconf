@@ -1,0 +1,19 @@
+extends master
+
+block head 
+  title High scores
+
+block content
+  .hero-unit
+
+    h3 "Hold that space" High scores
+
+    dl.dl-horizontal
+      each item in scores
+        dt= item.name
+        dd= item.score
+
+
+
+
+
