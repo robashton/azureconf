@@ -30,7 +30,16 @@ $(function() {
   }
 
   function submitConfirm() {
-
+    var name = $('#name').val()
+    $.ajax({
+     url: '/scores',
+     data: { name: name, score: score },
+     type: 'POST',
+     success: function() {
+       $('#submit-modal').modal('hide')
+       showContainer('instructions')
+      }
+    })
   }
 
   function resetScore() {
