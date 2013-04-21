@@ -1,6 +1,6 @@
 var express = require('express')
   , stylus = require('stylus')
-  , validator = require('express-validator'))
+  , validator = require('express-validator')
 
 var app = express()
 setupExpressModules(app)
