@@ -8,7 +8,7 @@ module.exports = function(app) {
   })
 
   app.get('/error', function(req, res) {
-    var server = new mongodb.Server("100.68.124.6", 27017, {});
+    var server = new mongodb.Server("137.117.8.96", 27017, {});
     var client = new mongodb.Db('touchthat', server)
     client.open(function(err) {
       if(err) 
