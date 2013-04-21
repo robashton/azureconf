@@ -7,17 +7,6 @@ module.exports = function(app) {
     res.render('index')
   })
 
-  app.get('/error', function(req, res) {
-    var server = new mongodb.Server("137.117.8.96", 27017, {});
-    var client = new mongodb.Db('touchthat', server)
-    client.open(function(err) {
-      if(err) 
-        res.send({err: err})
-      else 
-        res.send("success")
-    })
-  })
-
   app.get('/highscores', function(req, res) {
     db.collection('scores', function(err, collection) {
       collection.find().sort({score: -1}).limit(10).toArray(function(err, items) {
