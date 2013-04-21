@@ -11,10 +11,10 @@ module.exports = function(app) {
     var server = new mongodb.Server("100.68.124.6", 27017, {});
     var client = new mongodb.Db('touchthat', server)
     client.open(function(err) {
-      if(err) {
-        throw err;
-      }
-      else res.send("success")
+      if(err) 
+        res.send({err: err})
+      else 
+        res.send("success")
     })
   })
 
