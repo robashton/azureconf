@@ -9,10 +9,15 @@ module.exports = function(app) {
 
   app.get('/highscores', function(req, res) {
     db.collection('scores', function(err, collection) {
-      collection.find().sort({score: -1}).limit(10).toArray(function(err, items) {
+      collection.find().sort({score: 1}).limit(10).toArray(function(err, items) {
         res.render('highscores', { scores: items })
       })
     })
+  })
+
+
+  app.get('/test', function(req, res) {
+    res.send("hello")
   })
 
   app.post('/scores', function(req, res) {
