@@ -1,9 +1,21 @@
 var util = require('util')
   , db = require('./db')
+  , mongodb = require('mongodb')
 
 module.exports = function(app) {
   app.get('/', function(req, res) {
     res.render('index')
+  })
+
+  app.get('/error', function(req, res) {
+    var server = new mongodb.Server("100.68.124.6", 27017, {});
+    var client = new mongodb.Db('touchthat', server)
+    client.open(function(err) {
+      if(err) {
+        throw err;
+      }
+      else res.send("success")
+    })
   })
 
   app.get('/highscores', function(req, res) {
