@@ -15,11 +15,6 @@ module.exports = function(app) {
     })
   })
 
-
-  app.get('/test', function(req, res) {
-    res.send("hello")
-  })
-
   app.post('/scores', function(req, res) {
     req.check('name').notEmpty()
     req.check('score').isInt()
