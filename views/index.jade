@@ -2,4 +2,22 @@ extends master
 
 block head 
   title Hold that space!
+  script(type="text/javascript", src="game.js")
+
+block content
+  .hero-unit
+
+    #instructions 
+      h2 Hold that space bar!
+      p Hold down the space bar for as long as you can
+
+    #scoring
+      h2
+        | Score:
+        span#score
+
+    #result
+      h2
+        | you scored:
+        span#final-score
 
