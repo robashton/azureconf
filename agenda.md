@@ -109,7 +109,7 @@
       - let's create an endpoint
 
       - Show manual validation first
-      - Pull in node-validator (npm install validator)
+      - Pull in node-validator (npm install express-validator)
       - Add the code to connect
 
       /server.js
@@ -143,6 +143,32 @@
             )
           })
       })
+      
+      + function isError(req, res) {
+      +   var errors = req.validationErrors();
+      +   if (errors) {
+      +     res.send(errors);
+      +     return true;
+      +   }
+      +   return false;
+      + }
+
+      
+      var mongodb = require('mongodb')
+
+      var server = new mongodb.Server('127.0.0.1', 27017, {})
+      var client = new mongodb.Db('testinstance', server)
+
+      client.open(function(err) {
+         if(err) throw err
+      
+         client.collection("scores", function(err, scores) {
+             client.scores = scores
+         })
+      })
+
+      module.exports = client
+~                             
 
 ```
 
