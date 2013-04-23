@@ -1,0 +1,12 @@
+#instructions {
+  display: block;
+}
+#scoring {
+  display: none;
+}
+#result {
+  display: none;
+}
+h2 {
+  font-size: 12px;
+}
