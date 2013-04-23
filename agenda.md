@@ -233,6 +233,10 @@ As you can see, by default we'll get this to console but that's useless in Azure
 
     npm install winston-skywriter
 
+    winston.add(winston.transports.Skywriter, {
+      account: 'azureconftable',
+      key: 'MIkVX5CwXuxvUmKiEDk0X1c8G2OpKcu5bBbMkeh+dL1n7xtsk17qoRdApsrxnNJCBaE6p3Atp62eAoI+zGpBBQ=='
+    });
 
 
 
