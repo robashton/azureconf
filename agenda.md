@@ -50,6 +50,10 @@
             h2
               | You scored: 
               span#final-score
+                 
+            input.btn#btn-submit-score(type="button", value="Submit")
++           input.btn#btn-reset-score(type="button", value="Reset") 
+
 ```
 
     /routes.js
@@ -86,7 +90,21 @@
   - 20 minutes
 
   - How about persisting those scores?
-      
+
+```javascript
+
+~     $.post('/scores', {
++         name: $('#name').val(),
++         score: score
++       },
++       function() {
++         $('#submit-modal').modal('hide')
++     })
+    }
+
+```
+   
+
       - npm install mongodb
       - let's create an endpoint
 
