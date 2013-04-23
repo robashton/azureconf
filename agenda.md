@@ -13,6 +13,7 @@
   - Putting together this game  (write the code from snippets)
     - express
 
+
 ```javascript
       function setupExpressModules(app) {
         app.set('views', __dirname + '/views')
@@ -127,7 +128,112 @@
 
 ```
 
-  
+db.js
+
+```javascript
+
+    var mongodb = require('mongodb')
+
+    var server = new mongodb.Server("127.0.0.1", 27017, {});
+    var client = new mongodb.Db('touchthat', server)
+    client.open(function(err) {
+      if(err) {
+        console.log(err) // woah there
+      }
+    })
+
+    module.exports = client
+      
+```
+
+config.js
+
+
+```javascript
+    
+    var configs = {
+      production: {
+        port: process.env.PORT,
+        mongoip: "137.117.8.96",
+        mongoport: 27017
+        mongodb: 'touchthat'
+      },
+      dev: {
+        port: 8003
+        mongoip: "127.0.0.1",
+        mongoport: 27017
+        mongodb: 'touchthat'
+      }
+    }
+
+    module.exports = {
+      
+    }
+
+It's just code, so we can do whatever - it's nice to have it centralised though
+
+```
+
+Now, high scores?
+
+We'll need a route
+
+```javascript
+
+    app.get('/highscores', function(req, res) {
+      db.collection('scores', function(err, collection) {
+        collection.find().sort({score: 1}).limit(10).toArray(function(err, items) {
+          res.render('highscores', { scores: items })
+        })
+      })
+    })
+
+```javascript
+
+
+And we'll need a view
+
+```jade
+
+    extends master
+
+    block head 
+      title High scores
+
+    block content
+      .hero-unit
+
+        h3 "Hold that space" High scores
+
+        dl.dl-horizontal
+          each item in scores
+            dt= item.name
+            dd= item.score
+
+```
+
+How about logging?
+
+By default, logging is disabled and when enabled data ends up in FTP, blweh
+
+    npm install winston
+
+I use winston for logging, and my default transport during dev is console
+
+```javascript
+
+    app.use(function(err, req, res, next) {
+      winston.error(err.toString(), err.stack, err)
+      res.send(500, "generic error response")
+    })
+
+```
+
+As you can see, by default we'll get this to console but that's useless in Azure, let's log to an azure table instead.
+
+    npm install winston-skywriter
+
+
 
 
 

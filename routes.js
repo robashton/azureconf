@@ -1,6 +1,5 @@
 var util = require('util')
   , db = require('./db')
-  , mongodb = require('mongodb')
 
 module.exports = function(app) {
   app.get('/', function(req, res) {
@@ -15,20 +14,25 @@ module.exports = function(app) {
     })
   })
 
-  app.post('/scores', function(req, res) {
+  app.get('/failure', function(req, res, next) {
+    next(new Error("this is an error"))
+  })
+
+  app.post('/scores', function(req, res, next) {
     req.check('name').notEmpty()
     req.check('score').isInt()
     if(isError(req, res)) return
+
     var name = req.body.name
       , score = req.body.score
 
       db.collection('scores', function(err, collection) {
+        if(err) return next(err)
         collection.insert({ name: name, score: score }, 
           function( err, result ){ 
-            if(err)
-              res.send({error: err})
+          if(err) return next(err)
             else
-              res.send(result[0])
+            res.send(result[0])
           }
         )
       })

@@ -18,6 +18,8 @@
     "stylus": "~0.32.1",
     "validator": "~1.0.0",
     "express-validator": "~0.3.2",
-    "mongodb": "~1.2.14"
+    "mongodb": "~1.2.14",
+    "winston": "~0.7.1",
+    "winston-skywriter": "~0.1.3"
   }
 }
